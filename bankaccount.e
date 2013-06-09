@@ -65,7 +65,7 @@ class BANKACCOUNT
 		barauszahlung (betrag: DOUBLE)
 			require
 				betrag > 2.0
-				kontostand + betrag >= ueberziehungsrahmen
+				kontostand - betrag + ueberziehungsrahmen >= 0
 			do
 				kontostand := kontostand - betrag
 			end

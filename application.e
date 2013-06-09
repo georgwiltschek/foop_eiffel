@@ -31,8 +31,13 @@ feature {NONE} -- Initialization
 			k1.barauszahlung(175)
 			k1.info
 			
-			-- verletzt barauszahlungspostkondition 
-			k1.barauszahlung(100000)
+			-- verletzt barauszahlungspostkondition fuer ueberziehungsrahmen
+			-- k1.barauszahlung(100000)
+			-- k1.info
+			
+			-- verletzt barauszahlungspostkondition fuer ueberziehungsrahmen
+			-- fuer mindesteinzahlung
+			k1.bareinzahlung(1)
 			k1.info
 		end
 
