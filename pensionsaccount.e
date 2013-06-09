@@ -4,4 +4,7 @@ class
 inherit
 	BANKACCOUNT
 
+create
+	eroeffnen
+
 end

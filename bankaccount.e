@@ -100,4 +100,25 @@ class BANKACCOUNT
 			do
 				kontostand := kontostand - betrag
 			end
+
+		ueberweisung_an (k: BANKACCOUNT; betrag: DOUBLE)
+			require
+				betrag <= kontostand + ueberziehungsrahmen
+			do
+				kontostand := kontostand - betrag
+				k.ueberweisung_von(CURRENT, betrag)
+			ensure
+				-- ?
+			end
+		
+		ueberweisung_von (k: BANKACCOUNT; betrag: DOUBLE)
+			require
+				-- ?
+			do
+				kontostand := kontostand + betrag
+			ensure
+				-- ?
+			end
+
+
 end
