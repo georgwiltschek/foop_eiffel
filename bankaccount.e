@@ -10,6 +10,12 @@
 -- gespeicherten Daten (ausgenommen Änderungen des Guthabens)
 -- unterstützt werden.
 
+-- Auf Konten sollen zumindest folgende Zusicherungen gelten: Die
+-- Verzinsung und der Kreditrahmen sollen stets innerhalb der vom
+-- Kreditinstitut vorgegebenen Grenzen bleiben. Es gibt einen
+-- Mindestbetrag von 2 Euro für jede Einzahlung, Auszahlung und
+-- Überweisung.
+
 class BANKACCOUNT
 	inherit
 		any
@@ -40,7 +46,7 @@ class BANKACCOUNT
 				print ("%N")
 				print (ueberziehungsrahmen)
 				print ("%N")
-			end
+		end
 
 	feature -- ein/auszahlung
 		kontostand: DOUBLE
@@ -50,12 +56,15 @@ class BANKACCOUNT
 		zeichnungsberechtigter: STRING
 
 		bareinzahlung (betrag: DOUBLE)
+			require
+				betrag > 2.0
 			do
 				kontostand := kontostand + betrag
 			end
 
 		barauszahlung (betrag: DOUBLE)
 			require
+				betrag > 2.0
 				kontostand + betrag >= ueberziehungsrahmen
 			do
 				kontostand := kontostand - betrag

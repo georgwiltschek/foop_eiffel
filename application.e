@@ -30,6 +30,8 @@ feature {NONE} -- Initialization
 			k1.info
 			k1.barauszahlung(175)
 			k1.info
+			
+			-- verletzt barauszahlungspostkondition 
 			k1.barauszahlung(100000)
 			k1.info
 		end
