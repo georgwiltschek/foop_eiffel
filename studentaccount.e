@@ -10,8 +10,5 @@ class
 inherit
 	BANKACCOUNT
 
-create
-    make
-
 
 end
