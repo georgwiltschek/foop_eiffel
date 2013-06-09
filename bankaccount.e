@@ -19,15 +19,52 @@
 class BANKACCOUNT
 	inherit
 		any
-
+	
 	export
-	     {ANY} all
+	   	 {ANY} all
 	end
 
 	create
 		eroeffnen
 
-	feature {NONE} -- Initialization
+	feature -- vars
+		kontostand: DOUBLE
+		soll_zinsen: DOUBLE
+		haben_zinsen: DOUBLE
+		zeichnungsberechtigter: STRING
+		ueberziehungsrahmen: DOUBLE
+		
+		min_buchungsbetrag: DOUBLE
+		once
+			Result := 2.0
+		end
+		
+		max_ueberziehungsrahmen: DOUBLE
+		once
+			Result := 5000
+		end
+		
+		min_soll_zinsen: DOUBLE
+		once
+			Result := 1.0
+		end
+		
+		max_soll_zinsen: DOUBLE
+		once
+			Result := 3.0
+		end
+		
+		min_haben_zinsen: DOUBLE
+		once
+			Result := 1.0
+		end
+		
+		max_haben_zinsen: DOUBLE
+		once
+			Result := 3.0
+		end
+
+	feature -- constructor 
 		eroeffnen (u, sz, hz: DOUBLE; zb: STRING)
 				-- kontoeroeffnung
 			do
@@ -37,7 +74,7 @@ class BANKACCOUNT
 				zeichnungsberechtigter:= zb
 			end
 
-	feature
+	feature -- informationen
 		info
 			--
 			do
@@ -46,25 +83,19 @@ class BANKACCOUNT
 				print ("%N")
 				print (ueberziehungsrahmen)
 				print ("%N")
-		end
+			end
 
 	feature -- ein/auszahlung
-		kontostand: DOUBLE
-		ueberziehungsrahmen: DOUBLE
-		soll_zinsen: DOUBLE
-		haben_zinsen: DOUBLE
-		zeichnungsberechtigter: STRING
-
 		bareinzahlung (betrag: DOUBLE)
 			require
-				betrag > 2.0
+				betrag >= min_buchungsbetrag
 			do
 				kontostand := kontostand + betrag
 			end
 
 		barauszahlung (betrag: DOUBLE)
 			require
-				betrag > 2.0
+				betrag >= min_buchungsbetrag
 				kontostand - betrag + ueberziehungsrahmen >= 0
 			do
 				kontostand := kontostand - betrag

@@ -8,19 +8,17 @@ class
 
 inherit
 	ARGUMENTS
-	BANKACCOUNT
 
 create
 	make
 
 feature {NONE} -- Initialization
-
-	k1, k2, k3, k4, k5, k6, k7, k8, k9: BANKACCOUNT
+	k1: BANKACCOUNT
+	s1: STUDENTACCOUNT
 	
 	make
 			-- Run application.
 		do
-			
 			-- neues konto anlegen
 			create k1.eroeffnen(500,1,2,"Max Mustermann")
 			k1.info
@@ -37,8 +35,11 @@ feature {NONE} -- Initialization
 			
 			-- verletzt barauszahlungspostkondition fuer ueberziehungsrahmen
 			-- fuer mindesteinzahlung
-			k1.bareinzahlung(1)
-			k1.info
+			-- k1.bareinzahlung(1)
+			-- k1.info
+			create s1.eroeffnen(500,1,2,"Max Musterschueler")
+			s1.info
+			s1.bareinzahlung(1.2)
+			s1.info
 		end
-
 end
