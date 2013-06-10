@@ -63,10 +63,10 @@ class BANKACCOUNT
 		once
 			Result := 3.0
 		end
-
+		
 	feature -- constructor 
 		eroeffnen (u, sz, hz: DOUBLE; zb: STRING)
-				-- kontoeroeffnung
+			-- kontoeroeffnung
 			do
 				ueberziehungsrahmen := u
 				soll_zinsen := sz
@@ -87,10 +87,13 @@ class BANKACCOUNT
 
 	feature -- ein/auszahlung
 		bareinzahlung (betrag: DOUBLE)
+			-- 
 			require
 				betrag >= min_buchungsbetrag
 			do
 				kontostand := kontostand + betrag
+			ensure
+				kontostand - betrag = OLD kontostand
 			end
 
 		barauszahlung (betrag: DOUBLE)
@@ -99,6 +102,8 @@ class BANKACCOUNT
 				kontostand - betrag + ueberziehungsrahmen >= 0
 			do
 				kontostand := kontostand - betrag
+			ensure
+				kontostand + betrag = OLD kontostand
 			end
 
 		ueberweisung_an (k: BANKACCOUNT; betrag: DOUBLE)
@@ -108,7 +113,7 @@ class BANKACCOUNT
 				kontostand := kontostand - betrag
 				k.ueberweisung_von(CURRENT, betrag)
 			ensure
-				-- ?
+				kontostand + betrag = OLD kontostand
 			end
 		
 		ueberweisung_von (k: BANKACCOUNT; betrag: DOUBLE)
@@ -117,8 +122,6 @@ class BANKACCOUNT
 			do
 				kontostand := kontostand + betrag
 			ensure
-				-- ?
+				kontostand - betrag = OLD kontostand
 			end
-
-
 end

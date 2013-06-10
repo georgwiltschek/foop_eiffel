@@ -15,7 +15,8 @@ create
 feature {NONE} -- Initialization
 	k1: BANKACCOUNT
 	s1: STUDENTACCOUNT
-	p1: PENSIONSACCOUNT	
+	p1: PENSIONSACCOUNT
+
 	make
 			-- Run application.
 		do
@@ -34,7 +35,7 @@ feature {NONE} -- Initialization
 -- k1.bareinzahlung(1)
 -- k1.info
 			create s1.eroeffnen(500,1,2,"Max Musterschueler")
-			s1.bareinzahlung(1.20)
+			s1.bareinzahlung(1)
 
 
 			k1.info

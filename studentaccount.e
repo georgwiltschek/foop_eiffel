@@ -13,7 +13,7 @@ create
 feature -- ein/auszahlung
 	bareinzahlung (betrag: DOUBLE)
 		require else
-			betrag > 1.0
+			betrag >= 1.0
 		do
 			kontostand := kontostand + betrag
 		end
