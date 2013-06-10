@@ -67,11 +67,22 @@ class BANKACCOUNT
 	feature -- constructor 
 		eroeffnen (u, sz, hz: DOUBLE; zb: STRING)
 			-- kontoeroeffnung
+			require
+				u <= max_ueberziehungsrahmen
+				sz >= min_soll_zinsen
+				sz <= max_soll_zinsen
+				hz >= min_haben_zinsen
+				hz <= max_haben_zinsen
 			do
 				ueberziehungsrahmen := u
 				soll_zinsen := sz
 				haben_zinsen := hz
-				zeichnungsberechtigter:= zb
+				zeichnungsberechtigter := zb
+			ensure
+				ueberziehungsrahmen = u
+				soll_zinsen = sz
+				haben_zinsen = hz
+				zeichnungsberechtigter = zb
 			end
 
 	feature -- informationen
@@ -82,7 +93,7 @@ class BANKACCOUNT
 				print (kontostand)
 				print ("%N")
 				print (ueberziehungsrahmen)
-				print ("%N")
+				print ("%N------------------------%N")
 			end
 
 	feature -- ein/auszahlung
