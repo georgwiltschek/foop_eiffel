@@ -4,17 +4,22 @@ class
 inherit
 	BANKACCOUNT
 	redefine
-		bareinzahlung
+		eroeffnen, min_buchungsbetrag
 	end
 
 create
 	eroeffnen
-	
-feature -- ein/auszahlung
-	bareinzahlung (betrag: DOUBLE)
-		require else
-			betrag >= 1.0
+
+feature
+	min_buchungsbetrag: DOUBLE
+	once
+		Result := 1.0
+	end
+
+feature
+	-- zb muss ein student sein
+	eroeffnen (u, sz, hz: DOUBLE; zb: STUDENT)
 		do
-			kontostand := kontostand + betrag
+			Precursor (u, sz, hz, zb)
 		end
 end
