@@ -19,7 +19,8 @@ feature {NONE} -- Initialization
 	k1: BANKACCOUNT
 	s1: STUDENTACCOUNT
 	p1: PENSIONSACCOUNT
-
+	in: STRING
+	tmp: BANKACCOUNT
 	make
 			-- Run application.
 		do
@@ -32,7 +33,7 @@ feature {NONE} -- Initialization
 
 			-- neues konto anlegen
 			create k1.eroeffnen(500,1,2,per)
-			k1.bareinzahlung(100)
+			k1.bareinzahlung(10000)
 			k1.barauszahlung(25)
 			k1.barauszahlung(175)
 
@@ -59,6 +60,11 @@ feature {NONE} -- Initialization
 
 			create p1.eroeffnen(500,1,2,pen)
 			p1.info
+
+			-- exception durch kovariante methodenparameter
+			tmp := p1
+			tmp.ueberweisung_an(s1, 100)
+
 --			p1.bareinzahlung(1.2)
 --		p1.info
 

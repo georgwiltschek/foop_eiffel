@@ -4,7 +4,7 @@ class
 inherit
 	BANKACCOUNT
 	redefine
-		eroeffnen, min_buchungsbetrag
+		eroeffnen, min_buchungsbetrag, ueberweisung_an
 	end
 
 create
@@ -22,4 +22,11 @@ feature
 		do
 			Precursor (u, sz, hz, zb)
 		end
+		
+	ueberweisung_an (k: PENSIONSACCOUNT; betrag: DOUBLE)
+		do
+			kontostand := kontostand - betrag
+			k.ueberweisung_von(CURRENT, betrag)
+		end
+
 end
