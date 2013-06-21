@@ -63,7 +63,7 @@ class BANKACCOUNT
 		once
 			Result := 3.0
 		end
-		
+
 	feature -- constructor 
 		eroeffnen (u, sz, hz: DOUBLE; zb: STRING)
 			-- kontoeroeffnung
@@ -131,10 +131,15 @@ class BANKACCOUNT
 		
 		ueberweisung_von (k: BANKACCOUNT; betrag: DOUBLE)
 			require
-				-- ?
+				betrag > 0
+				k /= Void
 			do
 				kontostand := kontostand + betrag
 			ensure
 				kontostand - betrag = OLD kontostand
 			end
+
+	invariant
+		kontostand > 0 - ueberziehungsrahmen
+
 end
