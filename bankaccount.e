@@ -19,7 +19,7 @@
 class BANKACCOUNT
 	inherit
 		ANY
-	
+
 	export
 	   	 {NONE} all
 	end
@@ -73,7 +73,6 @@ class BANKACCOUNT
 				sz <= max_soll_zinsen
 				hz >= min_haben_zinsen
 				hz <= max_haben_zinsen
-				not zb.empty
 			do
 				ueberziehungsrahmen := u
 				soll_zinsen := sz
@@ -84,7 +83,6 @@ class BANKACCOUNT
 				soll_zinsen = sz
 				haben_zinsen = hz
 				zeichnungsberechtigter = zb
-				not zb.empty
 			end
 
 	feature -- informationen
